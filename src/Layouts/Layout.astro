@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -17,13 +16,7 @@ const base = import.meta.env.BASE_URL;
     <title>{title}</title>
   </head>
   <body class="text-white relative">
-    <div class="fixed inset-0 z-0">
-      <img
-        src={base + "Web_Ejercicio_CDMX.png"}
-        alt=""
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-[#1D1D1D]/70"></div>
+    <div class="fixed inset-0 z-0" style="background: radial-gradient(ellipse at bottom right, #F2597A 0%, #FAC7FF 30%, #1D1D1D 65%), radial-gradient(ellipse at top left, #ECD2FF 0%, #1D1D1D 50%); background-blend-mode: screen;">
     </div>
     <div class="relative z-10">
       <slot />
