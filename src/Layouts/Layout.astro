@@ -4,14 +4,7 @@ import '../styles/global.css';
 const base = import.meta.env.BASE_URL;
 
 interface Props {
-title: string;
-}
-
-const { title } = Astro.props;
----
-
-interface Props {
-title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -19,26 +12,22 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-</head>
-<body class="text-white relative">
-    <!-- Fondo global que cubre toda la página -->
+  </head>
+  <body class="text-white relative">
     <div class="fixed inset-0 z-0">
-<img 
-    src={`${base}Web_Ejercicio_CDMX.png`}
-    alt="" 
-    class="w-full h-full object-cover"
-/>
-<!-- Overlay oscuro para que el texto sea legible -->
-<div class="absolute inset-0 bg-[#1D1D1D]/70"></div>
+      <img
+        src={base + 'Web_Ejercicio_CDMX.png'}
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-[#1D1D1D]/70"></div>
     </div>
-
-<!-- Todo el contenido va encima del fondo -->
-<div class="relative z-10">
-<slot />
-</div>
-</body>
+    <div class="relative z-10">
+      <slot />
+    </div>
+  </body>
 </html>
