@@ -1,13 +1,12 @@
 ---
 import '../styles/global.css';
 
-const base = import.meta.env.BASE_URL;
-
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -20,7 +19,7 @@ const { title } = Astro.props;
   <body class="text-white relative">
     <div class="fixed inset-0 z-0">
       <img
-        src={base + 'Web_Ejercicio_CDMX.png'}
+        src={base + "Web_Ejercicio_CDMX.png"}
         alt=""
         class="w-full h-full object-cover"
       />
