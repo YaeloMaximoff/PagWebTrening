@@ -1,16 +1,17 @@
 ---
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="w-full px-8 py-5 flex items-center justify-between bg-[#1D1D1D]/80 backdrop-blur-sm fixed top-0 left-0 z-40">
 
   <!-- Logo -->
   <div class="flex items-center gap-2 translate-y-0.1">
-    <img src="/Logo.png" alt="Ejercicio CDMX" class="h-20 w-auto object-contain" />
+    <img src={`${base}Logo.png`} alt="Ejercicio CDMX" class="h-20 w-auto object-contain" />
   </div>
 
   <!-- Nav Links -->
   <nav class="hidden md:flex items-center gap-8">
-    <img src="/Main Button.svg" alt="Trening" class="h-12 w-auto object-contain translate-y-2.5" />
+    <img src={`${base}Main Button.svg`} alt="Trening" class="h-12 w-auto object-contain translate-y-2.5" />
     <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">FEED</a>
     <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">ABOUT</a>
     <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">MAIN FEED</a>
@@ -20,8 +21,8 @@
 
   <!-- Buttons -->
   <div class="flex items-center gap-3 translate-y-3">
-    <img src="/LOGIN.svg" alt="Log In" class="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity object-contain" />
-    <img src="/SIGNin.svg" alt="Sign In" class="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity object-contain" />
+    <img src={`${base}LOGIN.svg`} alt="Log In" class="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity object-contain" />
+    <img src={`${base}SIGNin.svg`}  alt="Sign In" class="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity object-contain" />
   </div>
 
 </header>

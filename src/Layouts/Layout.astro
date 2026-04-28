@@ -19,7 +19,7 @@ const { title } = Astro.props;
     <!-- Fondo global que cubre toda la página -->
     <div class="fixed inset-0 z-0">
       <img 
-        src="/Web_Ejercicio_CDMX.png" 
+        src={`${import.meta.env.BASE_URL}Web_Ejercicio_CDMX.png`}
         alt="" 
         class="w-full h-full object-cover"
       />
