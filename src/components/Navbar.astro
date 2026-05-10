@@ -1,32 +1,58 @@
 ---
 const base = import.meta.env.BASE_URL;
+const navLinks = [
+  { label: "Explorar", href: base },
+  { label: "Destacados", href: base + "destacados" },
+  { label: "Nosotros", href: base + "nosotros" },
+  { label: "Contacto", href: "#footer" },
+];
 ---
 
-<header class="w-full px-8 py-5 flex items-center justify-between bg-[#1D1D1D]/80 backdrop-blur-sm fixed top-0 left-0 z-40">
+<header class="w-full px-8 py-4 flex items-center justify-between fixed top-0 left-0 z-50 bg-[#1a0a0f]/80 backdrop-blur-md border-b border-white/5">
 
-  <!-- Logo -->
-  <div class="flex items-center gap-2">
-    <img src={`${base}/Logo.png`} alt="Ejercicio CDMX" class="h-20 w-auto object-contain" />
-  </div>
+<!-- Logo -->
+<a href={base} class="flex items-center gap-2">
+  <img 
+    src={base + "Logo.png"} 
+    alt="Trening" 
+    class="h-10 w-auto object-contain"
+  />
+  <span class="text-pink-500 font-black text-lg tracking-wider">Trening</span>
+</a>
 
   <!-- Nav Links -->
   <nav class="hidden md:flex items-center gap-8">
-    <span class="px-4 py-1.5 rounded-full bg-pink-500 text-black text-xs font-black tracking-widest">TRENING</span>
-    <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">FEED</a>
-    <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">ABOUT</a>
-    <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">MAIN FEED</a>
-    <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">BLOG</a>
-    <a href="#" class="text-white text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">CONTACTO</a>
+    {navLinks.map(link => (
+      <a 
+        href={link.href} 
+        class="text-white/70 text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
   </nav>
 
-  <!-- Buttons -->
-  <div class="flex items-center gap-3">
-    <button class="px-6 py-2 rounded-full bg-pink-500/80 backdrop-blur-sm text-white text-xs font-black tracking-widest hover:bg-pink-500 transition-colors">
-      LOG IN
-    </button>
-    <button class="px-6 py-2 rounded-full border border-white/40 text-white text-xs font-black tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors">
-      SIGN IN
-    </button>
+  <!-- Actions -->
+  <div class="flex items-center gap-4">
+    <a 
+      href={base + "login"} 
+      class="text-white/70 text-sm font-semibold tracking-widest hover:text-white transition-colors"
+    >
+      LOGIN
+    </a>
+    <a 
+      href={base + "crear-evento"}
+      class="px-4 py-2 rounded-full border border-pink-500 text-pink-500 text-xs font-black tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200"
+    >
+      CREAR EVENTO
+    </a>
+    <!-- Avatar placeholder -->
+    <div class="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500/40 flex items-center justify-center cursor-pointer hover:border-pink-500 transition-colors">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF2D78" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
   </div>
 
 </header>

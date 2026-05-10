@@ -1,0 +1,96 @@
+---
+import Layout from '../Layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+const valores = [
+  {
+    icono: "🏃",
+    titulo: "Movimiento",
+    descripcion: "Creemos que el deporte urbano transforma vidas. No necesitas un gimnasio, necesitas tu ciudad.",
+  },
+  {
+    icono: "👥",
+    titulo: "Comunidad",
+    descripcion: "El deporte es mejor cuando se comparte. Trening nace para unir a quienes ya se mueven y a quienes quieren empezar.",
+  },
+  {
+    icono: "📍",
+    titulo: "Ciudad",
+    descripcion: "CDMX es nuestro campo. Cada parque, calle y cancha es una oportunidad para conectar y competir.",
+  },
+];
+---
+
+<Layout title="Nosotros — Trening">
+  <Navbar />
+
+  <main class="min-h-screen w-full pb-16" style="padding-top: 100px;">
+    <div class="max-w-4xl mx-auto px-6 flex flex-col gap-16">
+
+      <!-- Hero -->
+      <div class="flex flex-col gap-6">
+        <p class="text-pink-500 text-xs font-semibold tracking-widest uppercase">Quiénes somos</p>
+        <h1 class="text-white font-black text-4xl md:text-6xl leading-tight">
+          Unimos a la comunidad deportiva de la CDMX
+        </h1>
+        <p class="text-white/60 text-base leading-relaxed text-justify max-w-2xl">
+          Trening nació de una idea simple: en la Ciudad de México hay miles de personas que corren, pedalean, saltan y compiten todos los días, pero no se conocen entre sí. Nosotros queremos cambiar eso.
+        </p>
+      </div>
+
+      <!-- Separador visual -->
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-pink-500/40 to-transparent"></div>
+
+      <!-- Propósito -->
+      <div class="flex flex-col md:flex-row gap-12 items-start">
+        <div class="flex-1 flex flex-col gap-4">
+          <h2 class="text-pink-500 font-black text-2xl">Nuestro propósito</h2>
+          <p class="text-white/60 text-sm leading-relaxed text-justify">
+            Queremos ser la plataforma donde la comunidad deportiva urbana de México encuentre su lugar. Un espacio donde puedas descubrir eventos en tu colonia, unirte a grupos de entrenamiento, conocer a tu próximo compañero de carrera y compartir tus logros.
+          </p>
+          <p class="text-white/60 text-sm leading-relaxed text-justify">
+            No somos una app de fitness. Somos una red social del deporte callejero. La diferencia está en que aquí, lo que importa no es cuántas calorías quemas, sino a cuánta gente conectas.
+          </p>
+        </div>
+        <div class="w-full md:w-72 rounded-2xl border border-white/10 bg-white/5 p-8 flex flex-col items-center gap-4 shrink-0">
+          <img src={base + "Logo.png"} alt="Trening" class="h-16 w-16 object-contain" />
+          <span class="text-pink-500 font-black text-2xl tracking-widest">TRENING</span>
+          <p class="text-white/40 text-xs text-center">CDMX Urban Sports</p>
+          <div class="w-full h-px bg-white/10"></div>
+          <p class="text-white/30 text-xs text-center">Fundado en 2026 · Ciudad de México</p>
+        </div>
+      </div>
+
+      <!-- Valores -->
+      <div class="flex flex-col gap-8">
+        <h2 class="text-white font-black text-2xl">Lo que nos mueve</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {valores.map(valor => (
+            <div class="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-pink-500/40 transition-colors">
+              <span class="text-3xl">{valor.icono}</span>
+              <h3 class="text-white font-black text-lg">{valor.titulo}</h3>
+              <p class="text-white/50 text-sm leading-relaxed text-justify">{valor.descripcion}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="w-full rounded-2xl border border-pink-500/20 bg-pink-500/5 p-10 flex flex-col items-center gap-6 text-center" style="margin-top: 64px; margin-bottom: 32px;">
+        <h2 class="text-white font-black text-3xl">¿Listo para moverte?</h2>
+        <p class="text-white/50 text-sm max-w-md">
+          Únete a miles de personas que ya están usando Trening para descubrir el deporte urbano de la CDMX.
+        </p>
+        <a href={base + "login"}
+          class="px-10 py-4 rounded-full bg-pink-500 text-black font-black text-sm tracking-widest hover:bg-pink-400 hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+          ÚNETE AHORA
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

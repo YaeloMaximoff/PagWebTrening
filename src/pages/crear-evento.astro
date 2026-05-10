@@ -1,0 +1,157 @@
+---
+import Layout from '../Layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+const categorias = ["Running", "Cycling", "HIIT", "Fútbol", "Básquetbol", "Otro"];
+const zonas = ["Chapultepec", "Reforma", "Condesa", "Roma", "Polanco", "Coyoacán", "Otro"];
+---
+
+<Layout title="Crear Evento — Trening">
+  <Navbar />
+
+  <main class="min-h-screen w-full pb-16" style="padding-top: 100px;">
+    <div class="max-w-5xl mx-auto px-6">
+
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="text-pink-500 font-black text-4xl mb-2">Crear Evento</h1>
+        <p class="text-white/50 text-sm">Ignite the city. Publica tu evento aquí.</p>
+      </div>
+
+      <!-- Grid principal -->
+      <div class="flex flex-col md:flex-row gap-6">
+
+        <!-- Columna izquierda -->
+        <div class="flex-1 flex flex-col gap-6">
+
+          <!-- Basic Info -->
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col gap-5">
+            <h2 class="text-white font-black text-xl flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF2D78" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              Información principal
+            </h2>
+
+            <!-- Event Name -->
+            <div class="flex flex-col gap-2">
+              <label class="text-white/60 text-xs font-semibold tracking-widest">Nombre del Evento</label>
+              <input
+                type="text"
+                placeholder="e.g. Midnight Criterium"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 outline-none focus:border-pink-500/50 transition-colors"
+              />
+            </div>
+
+            <!-- Category -->
+            <div class="flex flex-col gap-2">
+              <label class="text-white/60 text-xs font-semibold tracking-widest">Categoría</label>
+              <select class="w-full bg-[#1a0a0f] border border-white/10 rounded-xl px-4 py-3 text-white/60 text-sm outline-none focus:border-pink-500/50 transition-colors cursor-pointer appearance-none">
+                <option value="" disabled selected>Elige tu deporte...</option>
+                {categorias.map(cat => (
+                  <option value={cat.toLowerCase()}>{cat}</option>
+                ))}
+              </select>
+            </div>
+
+            <!-- Description -->
+            <div class="flex flex-col gap-2">
+              <label class="text-white/60 text-xs font-semibold tracking-widest">Descripción</label>
+              <textarea
+                placeholder="What's the vibe? Who's invited?"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 outline-none focus:border-pink-500/50 transition-colors resize-none h-28"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Time & Place -->
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col gap-5">
+            <h2 class="text-white font-black text-xl flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF2D78" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Fecha y Lugar
+            </h2>
+
+            <!-- Fecha y Hora -->
+            <div class="flex gap-4">
+              <div class="flex flex-col gap-2 flex-1">
+                <label class="text-white/60 text-xs font-semibold tracking-widest">Fecha</label>
+                <input
+                  type="date"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white/60 text-sm outline-none focus:border-pink-500/50 transition-colors"
+                />
+              </div>
+              <div class="flex flex-col gap-2 flex-1">
+                <label class="text-white/60 text-xs font-semibold tracking-widest">Hora</label>
+                <input
+                  type="time"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white/60 text-sm outline-none focus:border-pink-500/50 transition-colors"
+                />
+              </div>
+            </div>
+
+            <!-- CDMX Zone -->
+            <div class="flex flex-col gap-2">
+              <label class="text-white/60 text-xs font-semibold tracking-widest">Zona CDMX</label>
+              <select class="w-full bg-[#1a0a0f] border border-white/10 rounded-xl px-4 py-3 text-white/60 text-sm outline-none focus:border-pink-500/50 transition-colors cursor-pointer appearance-none">
+                <option value="" disabled selected>Elegir Zona...</option>
+                {zonas.map(zona => (
+                  <option value={zona.toLowerCase()}>{zona}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="w-full md:w-72 flex flex-col gap-6 shrink-0">
+
+          <!-- Cover Art -->
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col gap-4">
+            <h2 class="text-white font-black text-xl flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF2D78" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="m21 15-5-5L5 21"/>
+              </svg>
+              Imagen principal
+            </h2>
+            <div class="w-full aspect-video rounded-xl border border-dashed border-white/20 bg-white/5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-pink-500/50 transition-colors group">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff30" stroke-width="1.5" class="group-hover:stroke-pink-500/50 transition-colors">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="m21 15-5-5L5 21"/>
+              </svg>
+              <p class="text-white/30 text-xs text-center group-hover:text-white/50 transition-colors">
+                Tap to upload poster<br/>
+                <span class="text-white/20">16:9 recommended</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Publicar -->
+          <div class="rounded-2xl border border-pink-500/30 bg-pink-500/5 p-6 flex flex-col items-center gap-3">
+            <h2 class="text-pink-500 font-black text-xl">Publicar Evento</h2>
+            <p class="text-white/40 text-xs text-center">Tu evento estará listo al instante.</p>
+            <button class="w-full py-4 rounded-full bg-pink-500 text-black font-black text-sm tracking-widest hover:bg-pink-400 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer mt-2">
+              PUBLICAR
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

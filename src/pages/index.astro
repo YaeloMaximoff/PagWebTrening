@@ -1,18 +1,136 @@
 ---
 import Layout from '../Layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import Events from '../components/Events.astro';
-import Cards from '../components/Cards.astro';	
 import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+const eventos = [
+  {
+    id: 1,
+    categoria: "Cycling",
+    badge: "Live",
+    fecha: "Hoy, 20:00",
+    titulo: "Rodada Nocturna Reforma",
+    ubicacion: "Reforma - Polanco",
+  },
+  {
+    id: 2,
+    categoria: "Running",
+    badge: null,
+    fecha: "Sáb, 07:00",
+    titulo: "5K Bosque de Chapultepec",
+    ubicacion: "Chapultepec, 1a Secc",
+  },
+  {
+    id: 3,
+    categoria: "HIIT",
+    badge: null,
+    fecha: "Dom, 09:00",
+    titulo: "Urban Bootcamp Condesa",
+    ubicacion: "Parque México",
+  },
+];
+
+const filtros = ["Todos", "Running", "Cycling", "HIIT", "Fútbol"];
 ---
 
-<Layout title="Ejercicio CDMX — Comunidad Deportiva">
-<Navbar />
-<main>
-<Hero />
-<Events />
-<Cards />
-</main>
-<Footer />
+<Layout title="Explorar — Trening">
+  <Navbar />
+
+  <main class="min-h-screen w-full pb-16">
+
+<div class="max-w-4xl mx-auto px-6" style="padding-top: 100px;">
+
+  <!-- Hero card -->
+  <div class="w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-12 flex flex-col items-center gap-6 text-center">
+    <div class="w-14 h-14 rounded-full bg-pink-500/20 flex items-center justify-center">
+      <img src={base + "Logo.png"} alt="Trening" class="h-9 w-9 object-contain" />
+    </div>
+    <h1 class="text-white font-black text-3xl md:text-4xl leading-tight">
+      Descubre el Deporte en CDMX
+    </h1>
+    <p class="text-white/50 text-sm">Eventos, comunidades y retos urbanos.</p>
+    <button class = "px-6 py-2 rounded-full btn-glass">
+      EXPLORAR AHORA
+    </button>
+  </div>
+
+  <!-- Búsqueda y filtros -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4" style="margin-top: 64px;">
+    <div class="flex items-center gap-3 flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-3 w-full">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff60" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        type="text"
+        placeholder="Buscar eventos, zonas..."
+        class="bg-transparent text-white text-sm placeholder-white/30 outline-none w-full"
+      />
+    </div>
+    <div class="flex items-center gap-2 flex-wrap shrink-0">
+      {filtros.map((filtro, i) => (
+        <button
+          class={`px-4 py-2 rounded-full text-xs font-bold tracking-wide border transition-all duration-200 cursor-pointer whitespace-nowrap
+            ${i === 0
+              ? 'border-white text-white hover:bg-white hover:text-black'
+              : 'border-white/20 text-white/50 hover:border-pink-500 hover:text-pink-500 hover:bg-pink-500/10'
+            }`}
+        >
+          {filtro}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Grid de eventos -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4" style="margin-top: 48px; margin-bottom: 64px;">
+    {eventos.map(evento => (
+      <a href={base + "evento"} class="group flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-pink-500/50 transition-all duration-200">
+        <div class="relative w-full aspect-video bg-gradient-to-br from-pink-900/40 to-[#1a0a0f] flex items-center justify-center">
+          {evento.badge && (
+            <span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-pink-500 text-black text-xs font-black">
+              • {evento.badge}
+            </span>
+          )}
+          <span class="absolute top-3 right-3 px-2 py-1 rounded-full bg-white/10 text-white text-xs font-bold border border-white/10">
+            {evento.categoria}
+          </span>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff20" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+        </div>
+        <div class="p-4 flex flex-col gap-3">
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            {evento.fecha}
+          </div>
+          <h3 class="text-white font-black text-base leading-tight group-hover:text-pink-400 transition-colors">
+            {evento.titulo}
+          </h3>
+          <div class="flex items-center gap-2 text-white/40 text-xs">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            {evento.ubicacion}
+          </div>
+          <button class="w-full py-2 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-500 text-xs font-bold tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200 cursor-pointer">
+            VER COMUNIDAD
+          </button>
+        </div>
+      </a>
+    ))}
+  </div>
+
+</div>
+  </main>
+
+  <Footer />
 </Layout>

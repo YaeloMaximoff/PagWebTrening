@@ -1,0 +1,210 @@
+---
+import Layout from '../Layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+const eventos = [
+  {
+    categoria: "Running",
+    fecha: "Sáb, 07:00",
+    titulo: "5K Bosque de Chapultepec",
+    ubicacion: "Chapultepec, 1a Secc",
+    participantes: 234,
+    reciente: false,
+  },
+  {
+    categoria: "Cycling",
+    fecha: "Hoy, 20:00",
+    titulo: "Rodada Nocturna Reforma",
+    ubicacion: "Reforma - Polanco",
+    participantes: 189,
+    reciente: true,
+  },
+  {
+    categoria: "HIIT",
+    fecha: "Dom, 09:00",
+    titulo: "Urban Run Xochimilco",
+    ubicacion: "Parque Ecológico Xochimilco",
+    participantes: 156,
+    reciente: true,
+  },
+  {
+    categoria: "Básquetbol",
+    fecha: "Sáb, 18:00",
+    titulo: "Torneo Relámpago Parque México",
+    ubicacion: "Canchas Parque México",
+    participantes: 142,
+    reciente: false,
+  },
+  {
+    categoria: "Fútbol",
+    fecha: "Dom, 08:00",
+    titulo: "Fut 7 Dominical Roma Norte",
+    ubicacion: "Roma Norte",
+    participantes: 98,
+    reciente: true,
+  },
+  {
+    categoria: "Running",
+    fecha: "Vie, 07:00",
+    titulo: "10K Nocturno Pedregal",
+    ubicacion: "Pedregal, Coyoacán",
+    participantes: 87,
+    reciente: false,
+  },
+];
+---
+
+<Layout title="Destacados — Trening">
+  <Navbar />
+
+  <main class="min-h-screen w-full pb-16" style="padding-top: 100px;">
+    <div class="max-w-5xl mx-auto px-6">
+
+      <!-- Header -->
+      <div class="mb-10 flex flex-col gap-2">
+        <p class="text-pink-500 text-xs font-semibold tracking-widest uppercase">Lo mejor de CDMX</p>
+        <h1 class="text-white font-black text-4xl md:text-5xl">Destacados</h1>
+        <p class="text-white/50 text-sm">Los eventos que más están moviendo a la ciudad.</p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="flex items-center gap-3 mb-10">
+        <button id="btn-populares"
+          class="px-6 py-2.5 rounded-full text-xs font-black tracking-widest border border-white text-white hover:bg-white hover:text-black transition-all duration-200 cursor-pointer">
+            POPULARES
+        </button>
+        <button id="btn-recientes"
+          class="px-6 py-2.5 rounded-full text-xs font-black tracking-widest border border-white/20 text-white/50 hover:border-pink-500 hover:text-pink-500 transition-all duration-200 cursor-pointer">
+            RECIENTES
+        </button>
+      </div>
+
+      <!-- Grid de eventos populares -->
+      <div id="lista-populares" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {eventos.sort((a, b) => b.participantes - a.participantes).map((evento, i) => (
+          <a href={base + "evento"} class="group flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-pink-500/50 transition-all duration-200">
+            
+            <!-- Imagen + ranking -->
+            <div class="relative w-full aspect-video bg-gradient-to-br from-pink-900/40 to-[#1a0a0f] flex items-center justify-center">
+              <span class="absolute top-3 left-3 w-7 h-7 rounded-full bg-pink-500 text-black text-xs font-black flex items-center justify-center">
+                {i + 1}
+              </span>
+              <span class="absolute top-3 right-3 px-2 py-1 rounded-full bg-white/10 text-white text-xs font-bold border border-white/10">
+                {evento.categoria}
+              </span>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff20" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="m21 15-5-5L5 21"/>
+              </svg>
+            </div>
+
+            <!-- Info -->
+            <div class="p-4 flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-white/40 text-xs">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  {evento.fecha}
+                </div>
+                <span class="text-pink-500 text-xs font-bold">{evento.participantes} 👥</span>
+              </div>
+              <h3 class="text-white font-black text-base leading-tight group-hover:text-pink-400 transition-colors">
+                {evento.titulo}
+              </h3>
+              <div class="flex items-center gap-2 text-white/40 text-xs">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                  <circle cx="12" cy="9" r="2.5"/>
+                </svg>
+                {evento.ubicacion}
+              </div>
+              <button class="w-full py-2 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-500 text-xs font-bold tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200 cursor-pointer">
+                VER COMUNIDAD
+              </button>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Grid de eventos recientes (oculto por defecto) -->
+      <div id="lista-recientes" class="grid grid-cols-1 md:grid-cols-3 gap-4 hidden">
+        {eventos.filter(e => e.reciente).map(evento => (
+          <a href={base + "evento"} class="group flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-pink-500/50 transition-all duration-200">
+            <div class="relative w-full aspect-video bg-gradient-to-br from-pink-900/40 to-[#1a0a0f] flex items-center justify-center">
+              <span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-pink-500/20 border border-pink-500/30 text-pink-400 text-xs font-bold">
+                🕐 Nuevo
+              </span>
+              <span class="absolute top-3 right-3 px-2 py-1 rounded-full bg-white/10 text-white text-xs font-bold border border-white/10">
+                {evento.categoria}
+              </span>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff20" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="m21 15-5-5L5 21"/>
+              </svg>
+            </div>
+            <div class="p-4 flex flex-col gap-3">
+              <div class="flex items-center gap-2 text-white/40 text-xs">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                {evento.fecha}
+              </div>
+              <h3 class="text-white font-black text-base leading-tight group-hover:text-pink-400 transition-colors">
+                {evento.titulo}
+              </h3>
+              <div class="flex items-center gap-2 text-white/40 text-xs">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                  <circle cx="12" cy="9" r="2.5"/>
+                </svg>
+                {evento.ubicacion}
+              </div>
+              <button class="w-full py-2 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-500 text-xs font-bold tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200 cursor-pointer">
+                VER COMUNIDAD
+              </button>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const btnPopulares = document.getElementById('btn-populares');
+  const btnRecientes = document.getElementById('btn-recientes');
+  const listaPopulares = document.getElementById('lista-populares');
+  const listaRecientes = document.getElementById('lista-recientes');
+
+  btnPopulares?.addEventListener('click', () => {
+    listaPopulares?.classList.remove('hidden');
+    listaRecientes?.classList.add('hidden');
+    btnPopulares.classList.add('border-white', 'text-white');
+    btnPopulares.classList.remove('border-white/20', 'text-white/50');
+    btnRecientes?.classList.remove('border-white', 'text-white');
+    btnRecientes?.classList.add('border-white/20', 'text-white/50');
+  });
+
+  btnRecientes?.addEventListener('click', () => {
+    listaRecientes?.classList.remove('hidden');
+    listaPopulares?.classList.add('hidden');
+    btnRecientes.classList.add('border-white', 'text-white');
+    btnRecientes.classList.remove('border-white/20', 'text-white/50');
+    btnPopulares?.classList.remove('border-white', 'text-white');
+    btnPopulares?.classList.add('border-white/20', 'text-white/50');
+  });
+</script>
