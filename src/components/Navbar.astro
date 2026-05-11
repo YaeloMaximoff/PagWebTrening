@@ -2,8 +2,8 @@
 const base = import.meta.env.BASE_URL;
 const navLinks = [
   { label: "Explorar", href: base },
-  { label: "Destacados", href: base + "destacados" },
-  { label: "Nosotros", href: base + "nosotros" },
+  { label: "Destacados", href: base + "destacados/" },
+  { label: "Nosotros", href: base + "nosotros/" },
   { label: "Contacto", href: "#footer" },
 ];
 ---
@@ -35,13 +35,13 @@ const navLinks = [
   <!-- Actions -->
   <div class="flex items-center gap-4">
     <a 
-      href={base + "login"} 
+      href={base + "login/"} 
       class="text-white/70 text-sm font-semibold tracking-widest hover:text-white transition-colors"
     >
       LOGIN
     </a>
     <a 
-      href={base + "crear-evento"}
+      href={base + "crear-evento/"}
       class="px-4 py-2 rounded-full border border-pink-500 text-pink-500 text-xs font-black tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200"
     >
       CREAR EVENTO
