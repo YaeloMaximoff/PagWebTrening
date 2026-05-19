@@ -34,18 +34,8 @@ const navLinks = [
 
   <!-- Actions -->
   <div class="flex items-center gap-4">
-    <a 
-      href={base + "login/"} 
-      class="text-white/70 text-sm font-semibold tracking-widest hover:text-white transition-colors"
-    >
-      LOGIN
-    </a>
-    <a 
-      href={base + "crear-evento/"}
-      class="px-4 py-2 rounded-full border border-pink-500 text-pink-500 text-xs font-black tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200"
-    >
-      CREAR EVENTO
-    </a>
+    <div id="navbar-user"></div>
+    <div id="create-event-container"></div>
     <!-- Avatar placeholder -->
     <div class="w-8 h-8 rounded-full bg-pink-500/20 border border-pink-500/40 flex items-center justify-center cursor-pointer hover:border-pink-500 transition-colors">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF2D78" stroke-width="2">
@@ -56,3 +46,46 @@ const navLinks = [
   </div>
 
 </header>
+
+<script>
+
+  const navbarUser = document.getElementById('navbar-user');
+  const createEventContainer = document.getElementById('create-event-container');
+  const user = localStorage.getItem('user');
+  if (user) {
+    const parsedUser = JSON.parse(user);
+    navbarUser.innerHTML = `
+      <div class="flex items-center gap-4">
+        <span class="text-pink-500 text-sm font-bold tracking-wide">
+          Hola, ${parsedUser.name}
+        </span>
+        <button id="logout-btn"
+          class="text-white/70 text-sm font-semibold tracking-widest hover:text-pink-400 transition-colors">
+          CERRAR SESIÓN
+        </button>
+      </div>
+    `;
+    createEventContainer.innerHTML = `
+      <a 
+        href="/PagWebTrening/crear-evento/"
+        class="px-4 py-2 rounded-full border border-pink-500 text-pink-500 text-xs font-black tracking-widest hover:bg-pink-500 hover:text-black transition-all duration-200"
+      >
+        CREAR EVENTO
+      </a>
+    `;
+    document.getElementById('logout-btn')
+      ?.addEventListener('click', () => {
+        localStorage.removeItem('user');
+        window.location.reload();
+      });
+  } else {
+    navbarUser.innerHTML = `
+      <a 
+        href="/PagWebTrening/login/" 
+        class="text-white/70 text-sm font-semibold tracking-widest hover:text-white transition-colors"
+      >
+        LOGIN
+      </a>
+    `;
+  }
+</script>

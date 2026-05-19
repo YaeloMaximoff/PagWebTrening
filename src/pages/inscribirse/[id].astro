@@ -1,0 +1,243 @@
+---
+export const prerender = false;
+
+import Layout from '../../Layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const { id } = Astro.params;
+
+const response = await fetch(
+  `http://localhost:3001/api/events/${id}`
+);
+
+const evento = await response.json();
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Inscribirse — Trening">
+
+  <Navbar />
+
+  <main
+    class="min-h-screen w-full pb-16"
+    style="padding-top: 100px;"
+  >
+
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- EVENTO -->
+        <div
+          class="rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
+        >
+
+          {
+            evento.image && (
+              <img
+                src={evento.image}
+                alt={evento.title}
+                class="w-full aspect-video object-cover"
+              />
+            )
+          }
+
+          <div class="p-6 flex flex-col gap-4">
+
+            <span
+              class="text-pink-500 text-xs font-bold tracking-widest"
+            >
+              {evento.category}
+            </span>
+
+            <h1
+              class="text-white text-3xl font-black"
+            >
+              {evento.title}
+            </h1>
+
+            <p class="text-white/70 text-sm">
+              {evento.description}
+            </p>
+
+            <div class="flex flex-col gap-2 text-sm text-white/50">
+
+              <span>
+                📅 {evento.date}
+              </span>
+
+              <span>
+                ⏰ {evento.time}
+              </span>
+
+              <span>
+                📍 {evento.zone}
+              </span>
+
+              <span>
+                👤 Organiza: {evento.creator}
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div
+          class="rounded-2xl border border-pink-500/20 bg-white/5 p-8 flex flex-col gap-6"
+        >
+
+          <div>
+            <h2
+              class="text-pink-500 text-3xl font-black"
+            >
+              Inscribirte
+            </h2>
+
+            <p class="text-white/40 text-sm mt-2">
+              Completa tus datos para unirte al evento.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-5">
+
+            <input
+              id="register-name"
+              type="text"
+              placeholder="Nombre completo"
+              class="input-style"
+            />
+
+            <input
+              id="register-age"
+              type="number"
+              placeholder="Edad"
+              class="input-style"
+            />
+
+            <input
+              id="register-email"
+              type="email"
+              placeholder="Correo"
+              class="input-style"
+            />
+
+            <input
+              id="register-phone"
+              type="text"
+              placeholder="Teléfono"
+              class="input-style"
+            />
+
+            <textarea
+              id="register-comments"
+              placeholder="Comentarios o dudas"
+              class="input-style h-32 resize-none"
+            ></textarea>
+
+            <button
+              id="register-btn"
+              class="w-full py-4 rounded-full bg-pink-500 text-black font-black tracking-widest hover:bg-pink-400 transition-all"
+            >
+              CONFIRMAR INSCRIPCIÓN
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+
+  .input-style {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 14px 16px;
+    color: white;
+    outline: none;
+    transition: 0.2s;
+  }
+
+  .input-style:focus {
+    border-color: #ff2d78;
+  }
+
+</style>
+
+<script>
+  const registerBtn = document.getElementById('register-btn');
+
+  registerBtn?.addEventListener('click', async () => {
+
+    console.log('CLICK DETECTADO');
+
+    const name =
+      document.getElementById('register-name').value;
+
+    const age =
+      document.getElementById('register-age').value;
+
+    const email =
+      document.getElementById('register-email').value;
+
+    const phone =
+      document.getElementById('register-phone').value;
+
+    const comments =
+      document.getElementById('register-comments').value;
+
+    const eventId = window.location.pathname.split('/')[3];
+
+    console.log('EVENT ID:', eventId);
+
+    try {
+
+      const response = await fetch(
+        'http://localhost:3001/api/registrations/create',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            eventId,
+            name,
+            age,
+            email,
+            phone,
+            comments
+          })
+        }
+      );
+
+      console.log('RESPONSE:', response);
+
+      const data = await response.json();
+
+      console.log('DATA:', data);
+
+      alert(data.message);
+      window.location.href = '/PagWebTrening/';
+
+    } catch (error) {
+
+      console.log('ERROR:', error);
+
+      alert('Error registrando inscripción');
+    }
+  });
+</script>
